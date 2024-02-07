@@ -6,9 +6,10 @@ const map = new mapboxgl.Map({
     zoom: 12, // starting zoom
 });
 
-map.on('load', () => {
+map.on('load', () => { // after everything has been loaded, this will happen
+    //the .on -> adds a listener = listening out for our map to be loaded. everything after the curly brackets will happen after the maps has been loaded.
     //Add a data source containing GeoJSON data
-    map.addSource('uoft-data', {
+    map.addSource('uoft-data', {  // source id (the first parameter), then in the backets you have to have the type of data and the source
         type: 'geojson',
         data: {
             "type": "FeatureCollection",
@@ -24,18 +25,18 @@ map.on('load', () => {
                             43.662343395037766
                         ],
                         "type": "Point"
-                    }
+                    }// instead of havign all the data here, link a data source to have it be less messy/more efficient. Get URL from hithub
                 }
             ]
         }
     });
-    map.addLayer({
-        'id': 'uoft-pnt',
-        'type': 'circle',
-        'source': 'uoft-data',
-        'paint': {
+    map.addLayer({ //to visualize a layer from the added source
+        'id': 'uoft-pnt', //the layer needs a unique id 
+        'type': 'circle',// this will be different depending on type of data source
+        'source': 'uoft-data',// use id used in the add source above
+        'paint': { // these parameters are different based on the type
             'circle-radius': 6,
             'circle-color': '#B42222'
-        }
+        }//this doesn't have to be in this positon in the javascript, can be under a button click or hover. currently this is in the load. 
     });
 });
